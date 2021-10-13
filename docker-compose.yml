@@ -1,0 +1,20 @@
+version: '2'
+services:
+    c1:
+        image: cassandra:3.9
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=c1
+    c2:
+        image: cassandra:3.9
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=c2
+            - CASSANDRA_SEEDS=c1    
+        links:
+            - c1:c1
+    c3:
+        image: cassandra:3.9
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=c3  
+            - CASSANDRA_SEEDS=c1    
+        links:
+            - c1
